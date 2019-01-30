@@ -43,7 +43,7 @@ SELECT "ecommerce_invoiceline"."id", "ecommerce_invoiceline"."invoice_id", "ecom
 
 ### A destacar
 
-*  Los nombres de facturas son gestionados mediante un modulo externo de django (`get_next_value`), el cual se encarga de bloquear DDBB y asignar un nombre unico al nombre de la factura mediante el uso de sequencias.
+*  Los nombres de facturas son gestionados mediante un modulo externo de django (`django-sequences`), el cual se encarga de bloquear DDBB y asignar un nombre unico al nombre de la factura mediante el uso de sequencias.
 
 
 
