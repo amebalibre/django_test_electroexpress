@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+  db:
+    container_name: pg
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: django
+      POSTGRES_DB: django
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data/pgdata
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: vai@mailbox.org
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - "80:80"
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
+
+volumes:
+  db-data:
