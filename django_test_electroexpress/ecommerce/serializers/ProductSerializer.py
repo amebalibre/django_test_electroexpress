@@ -1,10 +1,13 @@
-"""Serializer Class."""
+"""Products Serializer Class."""
 from rest_framework import serializers
 from ecommerce.models import Product
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    """."""
+    """Product serialzier.
+
+    There are two types of products right now. tablets and mobiles.
+    """
 
     type = serializers.CharField(source='get_type_display')
 

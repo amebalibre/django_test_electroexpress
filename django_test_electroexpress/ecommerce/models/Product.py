@@ -2,6 +2,9 @@
 from django.db import models
 from datetime import date
 
+_OUTSTOCK = 'OUTSTOCK'
+_DISCONTINUED = 'DISCONTINUED'
+
 
 class Product(models.Model):
     """The products represent tablets or mobiles."""
@@ -41,6 +44,17 @@ class Product(models.Model):
             self.discontinued_date and
             self.discontinued_date < date.today() or
             False)
+
+    def __str__(self):
+        """Verbose object."""
+        pattern = '[{}] {}'
+        if not self.stock and self.name:
+            name = pattern.format(_OUTSTOCK, self.name)
+        elif(self.was_discontinued and self.name):
+            name = pattern.format(_DISCONTINUED, self.name)
+        else:
+            name = self.name
+        return name or ''
 
     class Meta:
         """Meta data."""

@@ -49,6 +49,7 @@ class InvoiceAdmin(admin.ModelAdmin):
     """Admin portal."""
 
     list_display = [
+        'name',
         'payment_date',
         'total_lines',
         'total_promos',

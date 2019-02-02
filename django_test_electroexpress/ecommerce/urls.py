@@ -1,12 +1,14 @@
 """URL Configuration."""
-from django.conf.urls import url, include
-from rest_framework import routers
-from ecommerce import views
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from ecommerce.views import ProductView
+from ecommerce.views import InvoiceView
 
-router = routers.DefaultRouter()
-router.register(r'products', views.ProductViewSet)
-router.register(r'invoices', views.InvoiceViewSet)
-router.register(r'invoicelines', views.InvoiceViewSet)
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    path('products/', ProductView.ProductList.as_view()),
+    path('products/<int:pk>/', ProductView.ProductDetail.as_view()),
+    path('invoices/', InvoiceView.InvoiceList.as_view()),
+    path('invoices/<int:pk>/', InvoiceView.InvoiceDetail.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
