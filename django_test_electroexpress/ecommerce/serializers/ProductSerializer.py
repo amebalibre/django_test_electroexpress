@@ -9,8 +9,6 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     There are two types of products right now. tablets and mobiles.
     """
 
-    type = serializers.CharField(source='get_type_display')
-
     class Meta:
         """Metadata of serializer."""
 

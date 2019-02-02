@@ -25,7 +25,8 @@ class Product(models.Model):
     type = models.CharField(
         max_length=1,
         choices=TYPE_CHOICES,
-        default=MOBILE)
+        default=MOBILE,
+        blank=True)
 
     stock = models.IntegerField(default=99)
 
