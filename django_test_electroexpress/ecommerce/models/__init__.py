@@ -4,4 +4,4 @@ from ecommerce.models.Product import Product
 from ecommerce.models.Promo import Promo
 from ecommerce.models.Invoice import Invoice
 from ecommerce.models.InvoiceLine import InvoiceLine
-from ecommerce.models.User import User
+# from ecommerce.models.User import User

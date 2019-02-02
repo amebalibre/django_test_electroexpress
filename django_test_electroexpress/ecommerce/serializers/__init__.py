@@ -1,3 +1,4 @@
+from ecommerce.serializers.DesiredSerializer import DesiredSerializer
 from ecommerce.serializers.InvoiceSerializer import InvoiceSerializer
 from ecommerce.serializers.InvoiceSerializer import LineSerializer
 from ecommerce.serializers.ProductSerializer import ProductSerializer
