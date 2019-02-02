@@ -5,7 +5,7 @@ from ecommerce.serializers import ProductSerializer
 
 
 class ProductList(generics.ListCreateAPIView):
-    """API endpoint that allows data to be viewed."""
+    """API endpoint that allows data to be viewed or created."""
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

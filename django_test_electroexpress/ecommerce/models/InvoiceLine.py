@@ -1,7 +1,5 @@
 """Model Class."""
 from django.db import models
-from ecommerce.models import Invoice
-from ecommerce.models import Product
 from django.db.models import Q
 
 
@@ -14,11 +12,11 @@ class InvoiceLine(models.Model):
         return Q(stock__gt=0)
 
     invoice = models.ForeignKey(
-        Invoice,
+        to='Invoice',
         on_delete=models.CASCADE)
 
     product = models.ForeignKey(
-        Product,
+        to='Product',
         on_delete=models.SET_NULL,
         null=True,
         limit_choices_to=Q(stock__gt=0))
@@ -36,6 +34,10 @@ class InvoiceLine(models.Model):
     def total(self):
         """Total of all products."""
         return (self.quantity or 0) * self.price
+
+    def __str__(self):
+        """Verbose object."""
+        return str(self.product)
 
     def save(self, *args, **kwargs):
         """Persist price on N:M model."""
