@@ -34,8 +34,7 @@ class Product(models.Model):
 
     discontinued_date = models.DateField(
         null=True,
-        blank=True,
-    )
+        blank=True)
 
     @property
     def was_discontinued(self):

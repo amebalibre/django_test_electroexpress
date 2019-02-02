@@ -22,4 +22,5 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             'stock',
             'inclusion_date',
             'discontinued_date',
-            'was_discontinued')
+            'was_discontinued',
+        )

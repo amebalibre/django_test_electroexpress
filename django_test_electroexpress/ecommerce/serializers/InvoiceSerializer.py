@@ -29,12 +29,13 @@ class LineSerializer(serializers.HyperlinkedModelSerializer):
 class InvoiceSerializer(serializers.ModelSerializer):
     """Invoice serializer."""
 
-    lines = LineSerializer(source='invoiceline_set', many=True)
+    lines = LineSerializer(
+        source='invoiceline_set',
+        many=True)
     promos = serializers.SlugRelatedField(
         many=True,
         read_only=True,
-        slug_field='code'
-     )
+        slug_field='code')
 
     class Meta:
         """Metadata of serializer."""

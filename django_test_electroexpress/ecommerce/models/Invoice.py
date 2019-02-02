@@ -40,8 +40,7 @@ class Invoice(models.Model):
     lines = models.ManyToManyField(
         Product,
         through='InvoiceLine',
-        through_fields=('invoice', 'product'),
-    )
+        through_fields=('invoice', 'product'))
 
     @property
     def total_promos(self):
