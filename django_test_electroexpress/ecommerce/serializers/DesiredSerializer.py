@@ -2,9 +2,31 @@
 from rest_framework import serializers
 from ecommerce.models import Product
 from ecommerce.models import Desired
+from ecommerce.serializers.ProductSerializer import ProductSerializer
 
 
-class DesiredSerializer(serializers.HyperlinkedModelSerializer):
+class DesiredSerializer(serializers.ModelSerializer):
+    """Desired serialzier.
+
+    Products desired from user.
+    """
+
+    product = ProductSerializer(
+        many=False,
+        read_only=True,
+    )
+
+    class Meta:
+        """Metadata of serializer."""
+
+        model = Desired
+        fields = (
+            'owner',
+            'product',
+        )
+
+
+class DesiredCreateSerializer(serializers.ModelSerializer):
     """Desired serialzier.
 
     Products desired from user.
@@ -16,8 +38,7 @@ class DesiredSerializer(serializers.HyperlinkedModelSerializer):
     product = serializers.SlugRelatedField(
         slug_field='id',
         many=False,
-        queryset=Product.objects.all()
-    )
+        queryset=Product.objects.all())
 
     def create(self, validated_data):
         """Create new realation between connected user and product."""
