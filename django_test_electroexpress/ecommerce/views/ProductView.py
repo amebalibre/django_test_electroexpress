@@ -6,7 +6,7 @@ from ecommerce.serializers import ProductSerializer
 
 
 class ProductGeneric(object):
-    """API endpoint that allows data to be CRUD."""
+    """Generic class that allows data to be CRUD."""
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

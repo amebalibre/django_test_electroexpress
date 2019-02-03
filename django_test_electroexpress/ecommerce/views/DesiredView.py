@@ -1,54 +1,48 @@
 """Desired View."""
 from rest_framework import generics
-from rest_framework import permissions
 from ecommerce.models import Desired
 from ecommerce.serializers.DesiredSerializer import DesiredSerializer
-from ecommerce.serializers.DesiredSerializer import DesiredCreateSerializer
-from ecommerce.serializers.DesiredSerializer import DesiredPutSerializer
+from ecommerce.serializers.DesiredSerializer import DesiredDetailSerializer
 import ecommerce.permissions as custom_permissions
 
 
-class DesiredPermissions(object):
-    """Commons permissions settings."""
+class DesiredGeneric(object):
+    """Generic class that allows data to be CRUD."""
 
     queryset = Desired.objects.all()
-
-    permission_classes = (
-        permissions.IsAuthenticated,
-        custom_permissions.IsOwner)
-
-
-class DesiredList(DesiredPermissions, generics.ListAPIView):
-    """API endpoint that allows data to be viewed or created."""
-
     serializer_class = DesiredSerializer
+    permission_classes = (custom_permissions.IsOwner,)
+
+
+class DesiredList(DesiredGeneric, generics.ListCreateAPIView):
+    """API endpoint that allows data to be viewed or created."""
 
     def get_queryset(self):
         """Return all desireds of connected user."""
         return Desired.objects.all().filter(owner=self.request.user.id)
 
 
-class DesiredPut(DesiredPermissions, generics.UpdateAPIView):
-    """API endpoint that allows data to be updated."""
+class DesiredDetail(DesiredGeneric, generics.RetrieveDestroyAPIView):
+    """API endpoint that allows data to be retrieve or destroyed."""
 
-    serializer_class = DesiredPutSerializer
-
-    def perform_create(self, serializer):
-        """Allow us to modify how the instance save is managed."""
-        serializer.save(owner=self.request.user)
+    pass
 
 
-class DesiredCreate(DesiredPermissions, generics.CreateAPIView):
+class DesiredCreate(DesiredGeneric, generics.CreateAPIView):
     """API endpoint that allows data to be viewed or created."""
 
-    serializer_class = DesiredCreateSerializer
+    serializer_class = DesiredDetailSerializer
 
     def perform_create(self, serializer):
         """Allow us to modify how the instance save is managed."""
         serializer.save(owner=self.request.user)
 
 
-class DesiredDetail(DesiredPermissions, generics.RetrieveUpdateDestroyAPIView):
-    """API endpoint that allows data to be retrieve, updated or destroyed."""
+class DesiredPut(DesiredGeneric, generics.UpdateAPIView):
+    """API endpoint that allows data to be viewed or created."""
 
-    serializer_class = DesiredSerializer
+    serializer_class = DesiredDetailSerializer
+
+    def perform_create(self, serializer):
+        """Allow us to modify how the instance save is managed."""
+        serializer.save(owner=self.request.user)
