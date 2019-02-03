@@ -52,7 +52,7 @@ SELECT "ecommerce_invoiceline"."id", "ecommerce_invoiceline"."invoice_id", "ecom
 *  Implementar Auth para los usuarios
 *  Heredar y extender modelo: User
 *  Sistema de login
+*  Documentar el API
 *  Generacion de tests unitarios (no es posible implantar TDD).
 *  Completar modelo: Comment
-*  Completar modelo: Desired
 *  Intentar evitar `@property` para campos como total_promos (Invoice)
