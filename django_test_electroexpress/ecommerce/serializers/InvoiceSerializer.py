@@ -55,8 +55,14 @@ class InvoiceSerializer(serializers.ModelSerializer):
         read_only_fields = ('name',)
 
 
-class InvoiceCreateSerializer(serializers.ModelSerializer):
+class InvoiceCreateSerializer(InvoiceSerializer):
     """Invoice serializer."""
+
+    lines = serializers.SlugRelatedField(
+        slug_field='id',
+        many=True,
+        queryset=Product.objects.all()
+    )
 
     def create(self, validated_data):
         """Generate lines for invoice."""
@@ -70,28 +76,3 @@ class InvoiceCreateSerializer(serializers.ModelSerializer):
             invoice.delete()
         else:
             return invoice
-
-    lines = serializers.SlugRelatedField(
-        slug_field='id',
-        many=True,
-        queryset=Product.objects.all()
-    )
-    promos = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='code')
-
-    class Meta:
-        """Metadata of serializer."""
-
-        model = Invoice
-        fields = (
-            'name',
-            'total',
-            'total_lines',
-            'total_promos',
-            'shipping_cost',
-            'promos',
-            'lines',
-        )
-        read_only_fields = ('name',)
