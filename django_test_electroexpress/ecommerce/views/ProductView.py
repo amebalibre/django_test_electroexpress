@@ -1,18 +1,25 @@
 """Product View."""
 from rest_framework import generics
+from rest_framework import permissions
 from ecommerce.models import Product
 from ecommerce.serializers import ProductSerializer
 
 
-class ProductList(generics.ListCreateAPIView):
+class ProductGeneric(object):
+    """API endpoint that allows data to be CRUD."""
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly,)
+
+
+class ProductList(ProductGeneric, generics.ListCreateAPIView):
     """API endpoint that allows data to be viewed or created."""
 
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    pass
 
 
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProductDetail(ProductGeneric, generics.RetrieveUpdateDestroyAPIView):
     """API endpoint that allows data to be retrieve, updated or destroyed."""
 
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    pass
