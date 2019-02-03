@@ -25,6 +25,11 @@ class Invoice(models.Model):
         (IN_SPAIN, 'Shipping to spain ({}{})'.format(IN_SPAIN, settings.USD)),
         (OUT_SPAIN, 'International ({}{})'.format(OUT_SPAIN, settings.USD)))
 
+    owner = models.ForeignKey(
+        to='auth.User',
+        related_name='invoices',
+        on_delete=models.CASCADE)
+
     name = models.CharField(
         max_length=15,  # That's +2 length for unexpected
         default=_UNNAMED)

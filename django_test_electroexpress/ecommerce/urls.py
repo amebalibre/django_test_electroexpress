@@ -16,9 +16,6 @@ urlpatterns = [
     # invoices
     path('invoices/', InvoiceView.InvoiceList.as_view()),
     path('invoices/<int:pk>/', InvoiceView.InvoiceDetail.as_view()),
-    path('invoices/add/', InvoiceView.InvoiceCreate.as_view()),
-    # path('users/', UserView.UserList.as_view()),
-    # path('users/<int:pk>/', UserView.UserDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

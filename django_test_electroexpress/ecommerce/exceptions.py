@@ -4,12 +4,12 @@ from rest_framework import status
 
 
 class NotAcceptableOnInvoiceModel(APIException):
-    """The invoice can't be updated because it has already been paid."""
+    """The invoice can't be modified because it has already been paid."""
 
     status_code = status.HTTP_406_NOT_ACCEPTABLE
     default_code = 'unauthorized'
     default_detail = \
-        "Invoice can't be updated beause it has already been paid!"
+        "Invoice can't be create/destroy beause it has already been paid!"
 
 
 class ServerErrorOnCreate(APIException):
