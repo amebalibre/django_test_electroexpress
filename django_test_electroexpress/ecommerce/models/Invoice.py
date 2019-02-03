@@ -1,4 +1,5 @@
 """Model Class."""
+from django.conf import settings
 from django.db import models
 from django.db import transaction
 from ecommerce.models import Promo
@@ -21,8 +22,8 @@ class Invoice(models.Model):
     OUT_SPAIN = Decimal.from_float(15.45).quantize(
         Decimal('.01'), rounding=ROUND_UP)
     SHIPPING_COST_CHOICES = (
-        (IN_SPAIN, 'Shipping to spain ({}€)'.format(IN_SPAIN)),
-        (OUT_SPAIN, 'International ({}€)'.format(OUT_SPAIN)))
+        (IN_SPAIN, 'Shipping to spain ({}{})'.format(IN_SPAIN, settings.USD)),
+        (OUT_SPAIN, 'International ({}{})'.format(OUT_SPAIN, settings.USD)))
 
     name = models.CharField(
         max_length=15,  # That's +2 length for unexpected

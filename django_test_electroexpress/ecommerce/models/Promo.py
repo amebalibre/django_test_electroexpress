@@ -1,4 +1,5 @@
 """Model Class."""
+from django.conf import settings
 from django.db import models
 
 
@@ -28,7 +29,7 @@ class Promo(models.Model):
         if(self.type == self.PERCENT):
             t = '%'
         else:
-            t = '€'
+            t = settings.USD
         return '{code} ({value}{type})'.format(
             code=self.code,
             value=self.value,
