@@ -9,6 +9,7 @@ from ecommerce.views import InvoiceView
 urlpatterns = [
     path('desireds/', DesiredView.DesiredList.as_view()),
     path('desireds/<int:pk>/', DesiredView.DesiredDetail.as_view()),
+    path('desireds/<int:pk>/put/', DesiredView.DesiredPut.as_view()),
     path('desireds/add/', DesiredView.DesiredCreate.as_view()),
     path('products/', ProductView.ProductList.as_view()),
     path('products/<int:pk>/', ProductView.ProductDetail.as_view()),

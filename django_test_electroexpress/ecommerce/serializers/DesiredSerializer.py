@@ -13,8 +13,33 @@ class DesiredSerializer(serializers.ModelSerializer):
 
     product = ProductSerializer(
         many=False,
-        read_only=True,
-    )
+        read_only=True)
+
+    class Meta:
+        """Metadata of serializer."""
+
+        model = Desired
+        fields = (
+            'owner',
+            'product',
+        )
+        read_only_fields = ('owner',)
+
+
+class DesiredPutSerializer(serializers.ModelSerializer):
+    """Desired serialzier.
+
+    Products desired from user.
+    """
+
+    owner = serializers.ReadOnlyField(
+        source='owner.username')
+
+    def create(self, validated_data):
+        """Create new realation between connected user and product."""
+        owner = validated_data.pop('owner')
+        product = validated_data.pop('product')
+        return Desired.objects.create(owner=owner, product=product)
 
     class Meta:
         """Metadata of serializer."""
