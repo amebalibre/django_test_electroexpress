@@ -10,6 +10,13 @@ class NotAcceptableOnInvoiceModel(APIException):
     default_code = 'unauthorized'
     default_detail = \
         "Invoice can't be create/destroy beause it has already been paid!"
+class NotAcceptableOnPromoModel(APIException):
+    """The promo can't be modified because it has already been paid."""
+
+    status_code = status.HTTP_406_NOT_ACCEPTABLE
+    default_code = 'not_acceptable_on_promos'
+    default_detail = "The promotion can not be modified / destroyed " \
+                     "because there are invoices charged!"
 
 
 class ServerErrorOnCreate(APIException):
