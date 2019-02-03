@@ -49,9 +49,6 @@ SELECT "ecommerce_invoiceline"."id", "ecommerce_invoiceline"."invoice_id", "ecom
 
 ### TODO List (Con prioridad)
 
-*  Implementar Auth para los usuarios
-*  Heredar y extender modelo: User
-*  Sistema de login
 *  Documentar el API
 *  Generacion de tests unitarios (no es posible implantar TDD).
 *  Completar modelo: Comment
