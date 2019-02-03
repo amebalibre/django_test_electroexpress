@@ -7,36 +7,45 @@ from ecommerce.serializers.InvoiceSerializer import InvoiceCreateSerializer
 from ecommerce.serializers import LineSerializer
 
 
-class InvoiceList(generics.ListAPIView):
-    """API endpoint that allows data to be viewed."""
+class InvoiceGeneric(object):
+    """Generic class that allows data to be CRUD."""
 
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
 
 
-class InvoiceCreate(generics.CreateAPIView):
+class LineGeneric(object):
+    """Generic class that allows data to be CRUD."""
+
+    queryset = InvoiceLine.objects.all()
+    serializer_class = LineSerializer
+
+
+class InvoiceList(InvoiceGeneric, generics.ListAPIView):
+    """API endpoint that allows data to be viewed."""
+
+    pass
+
+
+class InvoiceCreate(InvoiceGeneric, generics.CreateAPIView):
     """API endpoint that allows data to be viewed or created."""
 
-    queryset = Invoice.objects.all()
     serializer_class = InvoiceCreateSerializer
 
 
-class InvoiceDetail(generics.RetrieveUpdateDestroyAPIView):
+class InvoiceDetail(InvoiceGeneric, generics.RetrieveUpdateDestroyAPIView):
     """API endpoint that allows data to be retrieve, updated or destroyed."""
 
-    queryset = Invoice.objects.all()
-    serializer_class = InvoiceSerializer
+    pass
 
 
-class LineList(generics.ListCreateAPIView):
+class LineList(LineGeneric, generics.ListCreateAPIView):
     """API endpoint that allows data to be viewed or created."""
 
-    queryset = InvoiceLine.objects.all()
-    serializer_class = LineSerializer
+    pass
 
 
-class LineDetail(generics.RetrieveUpdateDestroyAPIView):
+class LineDetail(LineGeneric, generics.RetrieveUpdateDestroyAPIView):
     """API endpoint that allows data to be retrieve, updated or destroyed."""
 
-    queryset = InvoiceLine.objects.all()
-    serializer_class = LineSerializer
+    pass
