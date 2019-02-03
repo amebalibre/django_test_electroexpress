@@ -43,8 +43,8 @@ class Invoice(models.Model):
         blank=True)
 
     payment_date = models.DateField(
-        default=date.today()
-    )
+        null=True,
+        blank=True)
 
     lines = models.ManyToManyField(
         to='Product',

@@ -1,8 +1,9 @@
 """Desireds Serializer Class."""
+from django.db.models import Q
 from rest_framework import serializers
 from ecommerce.models import Product
 from ecommerce.models import Desired
-from ecommerce.serializers.ProductSerializer import ProductSerializer
+from ecommerce.exceptions import ServerErrorOnCreate
 
 
 class DesiredSerializer(serializers.ModelSerializer):
@@ -11,9 +12,19 @@ class DesiredSerializer(serializers.ModelSerializer):
     Products desired from user.
     """
 
-    product = ProductSerializer(
+    product = serializers.SlugRelatedField(
+        slug_field='id',
         many=False,
-        read_only=True)
+        queryset=Product.objects.all().filter(Q(stock__gt=0)))
+
+    def create(self, validated_data):
+        """Create new realation between connected user and product."""
+        owner = validated_data.pop('owner')
+        product = validated_data.pop('product')
+        try:
+            return Desired.objects.create(owner=owner, product=product)
+        except TypeError:
+            raise ServerErrorOnCreate()
 
     class Meta:
         """Metadata of serializer."""
@@ -24,21 +35,3 @@ class DesiredSerializer(serializers.ModelSerializer):
             'product',
         )
         read_only_fields = ('owner',)
-
-
-class DesiredDetailSerializer(DesiredSerializer):
-    """Specific serialzier for create desireds models.
-
-    Products desired from user.
-    """
-
-    product = serializers.SlugRelatedField(
-        slug_field='id',
-        many=False,
-        queryset=Product.objects.all())
-
-    def create(self, validated_data):
-        """Create new realation between connected user and product."""
-        owner = validated_data.pop('owner')
-        product = validated_data.pop('product')
-        return Desired.objects.create(owner=owner, product=product)
