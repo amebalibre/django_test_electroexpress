@@ -135,4 +135,5 @@ REST_FRAMEWORK = {
 
 
 # Custom properties
+INVOICE_SEQUENCE_PREFIX = 'INV'
 USD = '€'
