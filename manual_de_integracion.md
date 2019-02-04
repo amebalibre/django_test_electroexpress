@@ -6,7 +6,7 @@
 
 ## Esquema de modelos
 
-![alt](./dia/relationships.jpeg)
+![relationships](./src/relationships.jpeg)
 
 
 
@@ -141,8 +141,6 @@ En este punto tuve bastantes problemas debido a que entre `PUT`, `GET`, `POST` t
   // HTTP 204 No Content
   ```
 
-
-
 El comportamiento del API ha sido unificado para todos los modelos, por lo  que evitaré la redundancia en el documento. Lo que sí que explicaremos serán las particularidades.
 
 
@@ -173,3 +171,10 @@ El comportamiento del API ha sido unificado para todos los modelos, por lo  que 
 1. Las promociones pueden ser vinculadas a las facturas por cualquier usuario.
 2. Sólo los usuarios administradores tienen autorización completa sobre las promociones.
 3. Una promoción que ha sido vinculada a una factura ya pagada no puede ser editada ni borrada (Sólo desactivada **PENDIENTE**).
+
+
+#### Documentación propia de django-rest-framework
+
+El proyecto cuenta con una documentación básica del API generada automáticamente por django-rest-framework, accesible desde https://localhost:8000/docs
+
+![drf-docs](./src/drf-docs.png)

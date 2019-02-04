@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: django
       POSTGRES_PASSWORD: django
-      POSTGRES_DB: django
+      POSTGRES_DB: electroexpress
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
@@ -21,8 +21,8 @@ services:
     image: dpage/pgadmin4:latest
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: vai@mailbox.org
-      PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_DEFAULT_EMAIL: fake@mail.io
+      PGADMIN_DEFAULT_PASSWORD: 1234
     ports:
       - "80:80"
 
